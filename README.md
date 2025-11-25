@@ -1,134 +1,136 @@
-# 📄 AI-Powered Contract Review System
+# LegalLens AI
 
-> **An intelligent multi-agent system for automated legal contract analysis using Google's Agent Development Kit (ADK)**
+> **Orchestrating Sequential, Parallel, and Loop Agents for Real-Time Legal Assessment**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Google ADK](https://img.shields.io/badge/Google-ADK-4285F4.svg)](https://github.com/google/adk)
+[![Gemini 2.0](https://img.shields.io/badge/Gemini-2.0%20Flash-orange.svg)](https://ai.google.dev/)
 [![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
----
-
-## 🎯 Purpose & Vision
-
-This system automates the traditionally manual and time-consuming process of legal contract review by leveraging a multi-agent AI architecture. Built using **Google's Agent Development Kit (ADK)**, it demonstrates production-grade agentic AI patterns including sequential workflows, parallel processing, and loop agents working together to deliver comprehensive contract analysis.
-
-### Problem Statement
-
-**Traditional contract review challenges:**
-- ⏰ **Time-intensive**: Manual review takes hours or days
-- 💰 **Costly**: Requires expensive legal expertise
-- ⚠️ **Error-prone**: Human oversight can miss critical clauses
-- 📊 **Inconsistent**: Different reviewers apply varying standards
-- 📈 **Not scalable**: Can't handle bulk contract processing
-
-### Our Solution
-
-An **AI-powered multi-agent system** that:
-- ✅ Analyzes contracts in **minutes** instead of hours
-- ✅ Provides **consistent, standards-based** reviews
-- ✅ Identifies **critical risks** automatically
-- ✅ Generates **comprehensive reports** in Markdown
-- ✅ Enables **interactive Q&A** about contract terms
-- ✅ Scales to **batch process** multiple contracts
+**A production-ready multi-agent system that automates comprehensive contract review in minutes, not hours.**
 
 ---
 
-## 🚀 Key Features
+## 🎯 The Problem
 
-### 🤖 **Multi-Agent Architecture**
-- **5 specialized AI agents** orchestrated by Google ADK
-- **Sequential workflow** for systematic analysis
-- **Parallel processing** for risk assessment efficiency
-- **Loop agents** for thorough clause extraction
+Contract review is a critical yet bottlenecked process in legal operations. Organizations face:
 
-### 📊 **Comprehensive Analysis**
-- Contract type classification (SaaS, Employment, NDA, MSA)
-- Metadata extraction (parties, dates, jurisdiction)
-- Clause-by-clause risk scoring (Critical/High/Medium/Low)
-- Playbook compliance checking against company standards
-- Executive summary with actionable recommendations
+- ⏰ **Time Constraints**: Manual review takes 2-3 hours per contract
+- 💰 **Cost Barriers**: Professional legal review costs $200-500/hour
+- 🎲 **Inconsistency**: Different reviewers apply varying standards
+- 📈 **Scalability Issues**: Cannot efficiently process contract portfolios
+- ⚠️ **Hidden Risks**: Non-lawyers miss critical clauses
 
-### 💬 **Interactive Q&A**
-- Context-aware chatbot powered by Gemini
-- Ask questions about any contract clause
-- References both contract text and analysis report
-- Multi-turn conversations with memory
+These challenges create real consequences: missed deadlines, expensive legal fees, overlooked risks, and deals falling through. The problem is particularly acute for individuals and small organizations who need legal protection but cannot afford traditional review services.
 
-### 📝 **Professional Reporting**
-- Structured Markdown reports with emojis and tables
-- One-click download as DOCX
-- Copy-to-clipboard functionality
-- Real-time agent trace visibility
+---
 
-### ⚡ **Batch Processing**
-- Process multiple contracts in one run
-- Automated report generation for entire folders
-- Perfect for contract portfolio analysis
+## 🤖 Why Agents?
+
+Agents are the ideal solution because contract review inherently requires **specialized expertise working in coordination**:
+
+### **Decomposition of Complex Expertise**
+Contract review isn't monolithic—it requires distinct skills: classification, extraction, risk assessment, compliance checking, and synthesis. Each skill maps naturally to a specialized agent.
+
+### **Parallel Processing**
+Risk assessment is embarrassingly parallel. Each clause can be evaluated independently. While a single LLM could score clauses sequentially, a parallel agent architecture processes all clauses simultaneously, dramatically reducing analysis time.
+
+### **Iterative Refinement**
+Clause extraction requires iteration. A loop agent can systematically work through sections, adapting its extraction strategy based on document format, until all clauses are captured.
+
+### **Progressive Disclosure**
+Agents enable real-time progress tracking. Users see exactly which stage is running, how many clauses have been found, and when analysis is complete—creating transparency impossible with monolithic LLM approaches.
 
 ---
 
 ## 🏗️ Architecture
 
-### High-Level System Design
+LegalLens AI employs a **hierarchical orchestration pattern** with a SequentialAgent root coordinating five specialized stages:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      USER INTERFACE                         │
-│  🖥️ Streamlit Web App (PDF Upload, Report Display, Chat)   │
+│                   contract_review_workflow                  │
+│                    (SequentialAgent - Root)                 │
 └────────────────────────┬────────────────────────────────────┘
                          │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│              AGENT ORCHESTRATION LAYER                      │
-│                                                             │
-│  🎯 Root: SequentialAgent (contract_review_workflow)       │
-│     │                                                       │
-│     ├──▶ Stage 1: Intake Agent (Metadata Extraction)      │
-│     │                                                       │
-│     ├──▶ Stage 2: Loop Agent (Clause Extraction)          │
-│     │           └─▶ Clause Extractor Agent                │
-│     │                                                       │
-│     ├──▶ Stage 3: Parallel Agent (Risk Scoring)           │
-│     │           └─▶ Risk Scorer Agent (concurrent)        │
-│     │                                                       │
-│     ├──▶ Stage 4: Playbook Agent (Compliance Check)       │
-│     │           └─▶ MCP Server (Standards Database)       │
-│     │                                                       │
-│     └──▶ Stage 5: Report Generator (Markdown Synthesis)   │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  EXTERNAL SERVICES                          │
-│  ☁️ Google Gemini API (gemini-2.0-flash-exp)              │
-│  💬 Google GenAI (Chat Q&A)                                │
-└─────────────────────────────────────────────────────────────┘
+         ┌───────────────┼───────────────┬─────────────┬──────────────┐
+         ▼               ▼               ▼             ▼              ▼
+    ┌─────────┐   ┌──────────┐   ┌──────────┐   ┌─────────┐   ┌──────────┐
+    │Stage 1  │   │Stage 2   │   │Stage 3   │   │Stage 4  │   │Stage 5   │
+    │Intake   │──▶│Extraction│──▶│Risk      │──▶│Playbook │──▶│Report    │
+    │Agent    │   │Loop      │   │Parallel  │   │Agent    │   │Generator │
+    └─────────┘   └──────────┘   └──────────┘   └─────────┘   └──────────┘
+         │             │               │              │              │
+    Gemini 2.0    Gemini 2.0     Gemini 2.0     Gemini 2.0    Gemini 2.0
+         │             │               │              │              │
+         ▼             ▼               ▼              ▼              ▼
+    PDF Parser    Loop Logic      Parallel       MCP Server     DOCX Export
+                  (max 10x)       Processing                    
 ```
 
-### Agent Workflow
+### **Stage 1: Contract Intake** (Sequential Agent)
+- Classifies contract type (Employment, SaaS, NDA, MSA)
+- Extracts metadata: parties, dates, jurisdiction, governing law
+- Assesses document quality
 
-```mermaid
-graph LR
-    PDF[PDF Upload] --> A1[Intake Agent]
-    A1 --> A2[Clause Loop]
-    A2 --> A3[Risk Parallel]
-    A3 --> A4[Playbook Agent]
-    A4 --> A5[Report Generator]
-    A5 --> Output[Markdown Report]
-```
+### **Stage 2: Clause Extraction** (Loop Agent)
+- Iteratively extracts clauses section-by-section
+- Identifies clause types (compensation, non-compete, IP, termination, etc.)
+- Captures key terms with confidence scores
+- **Max 10 iterations** for comprehensive coverage
 
-### Data Flow
+### **Stage 3: Risk Assessment** (Parallel Agent)
+- Concurrently evaluates risk for all clauses
+- Assigns risk levels: CRITICAL (9-10), HIGH (7-8), MEDIUM (4-6), LOW (1-3)
+- Identifies risk factors and provides recommendations
+- **Processes multiple clauses simultaneously** for speed
 
-1. **Input**: User uploads PDF contract
-2. **Parsing**: Extract text and metadata
-3. **Stage 1**: Classify contract type, extract parties/dates
-4. **Stage 2**: Loop through sections to extract all clauses
-5. **Stage 3**: Parallel risk scoring across clauses
-6. **Stage 4**: Compare each clause to playbook standards (via MCP)
-7. **Stage 5**: Synthesize comprehensive report
-8. **Output**: Display report + enable Q&A chat
+### **Stage 4: Playbook Compliance** (Sequential Agent + MCP)
+- Compares terms against company playbook standards
+- Uses **MCP (Model Context Protocol)** server for standards database
+- Generates deviation analysis with compliance status
+
+### **Stage 5: Report Generation** (Sequential Agent)
+- Synthesizes all findings into comprehensive Markdown report
+- Includes executive summary, critical issues, negotiation strategy
+- Provides clause-by-clause analysis and playbook comparison
+
+---
+
+## ✨ Key Features
+
+### 🎭 **Multi-Agent Orchestration**
+- **3 Agent Types Demonstrated**: Sequential, Loop, and Parallel
+- **5 Specialized Agents**: Each with domain-specific expertise
+- **Hierarchical Coordination**: Root orchestrator managing workflow
+
+### ⚡ **Real-Time Progress Tracking**
+- Weighted progress bar (Intake 15% → Extraction 25% → Risk 25% → Playbook 20% → Report 15%)
+- Stage-by-stage status updates with emojis
+- Live agent traces in sidebar showing reasoning
+
+### 📊 **Comprehensive Analysis**
+- **Metadata Extraction**: Parties, dates, jurisdiction, governing law
+- **Clause Identification**: 13+ clause types with key terms
+- **Risk Scoring**: 4-level risk assessment with detailed factors
+- **Playbook Compliance**: Deviation analysis against standards
+- **Negotiation Strategy**: Prioritized recommendations
+
+### 💬 **Interactive Q&A**
+- Context-aware chatbot powered by Gemini
+- Ask questions about any contract clause
+- References both contract text and analysis report
+
+### 📝 **Professional Reporting**
+- Structured Markdown with tables and emojis
+- One-click export to DOCX format
+- Copy-to-clipboard for easy sharing
+
+### 🔌 **MCP Integration**
+- Custom Model Context Protocol server
+- JSON-formatted playbook standards
+- Extensible for different contract types
 
 ---
 
@@ -137,18 +139,17 @@ graph LR
 ### **Core Framework**
 - **Google ADK** - Agent Development Kit for multi-agent orchestration
 - **Gemini 2.0 Flash** - LLM powering all 5 agents
-- **Python 3.10+** - Primary language
+- **Python 3.10+** - Primary development language
 
 ### **UI & Frontend**
-- **Streamlit** - Web interface and real-time updates
-- **Mermaid** - Architecture diagrams
-- **Custom CSS** - Dark mode styling
+- **Streamlit** - Web interface with real-time updates
+- **Custom CSS** - Dark mode styling and responsive design
 
 ### **Tools & Utilities**
 - **PyPDF2** - PDF text extraction
 - **python-docx** - Report export to DOCX
 - **MCP (Model Context Protocol)** - Playbook standards server
-- **dotenv** - Environment variable management
+- **python-dotenv** - Environment variable management
 
 ### **External APIs**
 - **Google Gemini API** - Agent LLM calls
@@ -164,8 +165,8 @@ graph LR
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/yourusername/legal-ai-project.git
-cd legal-ai-project
+git clone https://github.com/sameeerjadhav/contract_reviewer.git
+cd contract_reviewer
 ```
 
 ### Step 2: Create Virtual Environment
@@ -190,7 +191,7 @@ GOOGLE_API_KEY=your_api_key_here
 
 ---
 
-## 🎮 Usage
+## 🚀 Usage
 
 ### Option 1: Web Interface (Recommended)
 
@@ -227,6 +228,70 @@ ls output_reports/
 ```bash
 python run_single.py path/to/contract.pdf
 ```
+
+---
+
+## 📊 Demo Walkthrough
+
+### **Upload Contract**
+User uploads a 6-page employment contract PDF
+
+### **Real-Time Progress**
+```
+🚀 Starting analysis...
+  ↓
+⏳ 📋 Contract Intake - In Progress...
+✅ 📋 Contract Intake - Complete [15%]
+  ↓
+⏳ 📄 Clause Extraction - In Progress...
+✅ 📄 Clause Extraction - Complete [40%]
+  ↓
+⏳ ⚠️ Risk Assessment - In Progress...
+✅ ⚠️ Risk Assessment - Complete [65%]
+  ↓
+⏳ 📚 Playbook Compliance - In Progress...
+✅ 📚 Playbook Compliance - Complete [85%]
+  ↓
+⏳ 📝 Report Generation - In Progress...
+✅ 📝 Report Generation - Complete! [100%]
+```
+
+### **Generated Report**
+**Executive Summary**: High-level contract overview and key findings
+
+**Critical Issues ❌**:
+- Unpaid Position: This offers no compensation, potentially violating labor laws
+
+**High-Priority Issues ⚠️**:
+- Broad Non-Compete: 12-month restriction within 100-mile radius
+
+**Acceptable Terms ✅**:
+- Clear Position and Duties
+- Fixed Term of Employment (6 months)
+- Defined Reporting Structure
+
+**Negotiation Strategy**: Prioritized talking points for compensation and non-compete
+
+**Clause-by-Clause Analysis**: Detailed table with risk levels and recommendations
+
+**Total Analysis Time**: 2-3 minutes for 6-page contract
+
+---
+
+## 🎓 ADK Concepts Demonstrated
+
+This project showcases **8 core ADK capabilities**:
+
+| Category | Concept | Implementation |
+|----------|---------|----------------|
+| **Multi-Agent** | Sequential Agent | `contract_review_workflow` orchestrates 5 stages |
+| | Loop Agent | `clause_extraction_loop` iterates through sections |
+| | Parallel Agent | `risk_scoring_parallel` scores clauses concurrently |
+| | LLM Agent | 5 specialized Gemini-powered agents |
+| **Tools** | MCP Server | `PlaybookServer` for standards database |
+| | Custom Tools | `pdf_parser`, `risk_matrix`, `docx_generator` |
+| **Sessions** | State Management | `InMemoryRunner` + `st.session_state` |
+| **Observability** | Logging & Tracing | `run_debug()` streams to UI sidebar |
 
 ---
 
@@ -272,75 +337,34 @@ legal_ai_project/
 
 ---
 
-## 🤖 ADK Concepts Demonstrated
-
-This project showcases **8 core ADK capabilities**:
-
-| Category | Concept | Implementation |
-|----------|---------|----------------|
-| **Multi-Agent** | Sequential Agent | `contract_review_workflow` orchestrates 5 stages |
-| | Loop Agent | `clause_extraction_loop` iterates through sections |
-| | Parallel Agent | `risk_scoring_parallel` scores clauses concurrently |
-| | LLM Agent | 5 specialized Gemini-powered agents |
-| **Tools** | MCP Server | `PlaybookServer` for standards database |
-| | Custom Tools | `pdf_parser`, `risk_matrix`, `docx_generator` |
-| **Sessions** | State Management | `InMemoryRunner` + `st.session_state` |
-| **Observability** | Logging & Tracing | `run_debug()` streams to UI sidebar |
-
----
-
-## 📊 Sample Output
-
-### Report Structure
-```markdown
-# Contract Review Report: AI Engineer Position Offer
-
-## 1. Executive Summary
-This report analyzes the offer letter for an AI Engineer position...
-
-## 2. Critical Issues ❌
-- **Unpaid Position**: The role offers no compensation...
-
-## 3. High-Priority Issues ⚠️
-- **Compensation Structure**: Explore stipend possibilities...
-
-## 4. Acceptable Terms ✅
-- Clear start and end dates
-- Defined role and responsibilities
-- Remote work arrangement
-
-## 5. Negotiation Strategy
-...
-
-## 6. Clause-by-Clause Analysis
-| Clause | Risk Level | Recommendation |
-|--------|------------|----------------|
-| Compensation | CRITICAL (9/10) | Negotiate paid alternatives |
-| Term of Employment | LOW (1/10) | Acceptable |
-...
-```
-
----
-
 ## 🎯 Use Cases
 
 1. **Startups**: Review vendor contracts before signing
 2. **HR Teams**: Analyze employment offer letters for compliance
 3. **Legal Ops**: Bulk process contract portfolios
 4. **Small Businesses**: Get quick contract reviews without expensive lawyers
-5. **Education**: Teach students about AI agents and legal tech
+5. **Individuals**: Understand employment offers and service agreements
+6. **Education**: Teach students about AI agents and legal tech
 
 ---
 
 ## 🔮 Future Enhancements
 
-- [ ] **RAG Integration**: Vector search for large document collections
-- [ ] **Long-term Memory**: Memory Bank for cross-contract insights
-- [ ] **Agent Evaluation**: Automated testing framework
-- [ ] **A2A Protocol**: Agent-to-agent communication
-- [ ] **Multi-language Support**: Analyze contracts in Spanish, French, etc.
-- [ ] **Redline Generation**: Auto-generate suggested edits
-- [ ] **Workflow Customization**: User-defined playbooks
+### **Near-Term (Next 3 Months)**
+- [ ] **Token-Level Streaming**: Implement Gemini's streaming API for real-time report generation
+- [ ] **Custom Playbooks**: UI for uploading organization-specific playbook standards
+- [ ] **Multi-Language Support**: Extend to contracts in Spanish, French, Mandarin
+
+### **Medium-Term (3-6 Months)**
+- [ ] **RAG Integration**: Vector search for large documents (50+ pages)
+- [ ] **Memory Bank**: Long-term learning from user feedback
+- [ ] **Agent Evaluation**: Automated testing with golden datasets
+
+### **Long-Term (6-12 Months)**
+- [ ] **Redline Generation**: Auto-generate suggested contract edits
+- [ ] **A2A Protocol**: Agent-to-agent negotiation simulation
+- [ ] **Workflow Customization**: Visual editor for custom orchestration
+- [ ] **Advanced Analytics**: Portfolio trend analysis and insights
 
 ---
 
@@ -373,7 +397,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 **Sameer Narendra Jadhav**  
-Capstone Project - AI-Powered Contract Review System
+LegalLens AI - Multi-Agent Contract Review System
 
 For questions or feedback, please open an issue on GitHub.
 
@@ -382,9 +406,11 @@ For questions or feedback, please open an issue on GitHub.
 ## 🎓 Academic Context
 
 This project was developed as a capstone demonstration of:
-- Multi-agent system design
-- Production-grade AI orchestration
-- Legal tech automation
-- Full-stack AI application development
+- Multi-agent system design and orchestration
+- Production-grade AI application development
+- Legal tech automation and accessibility
+- Full-stack implementation with modern frameworks
 
-**Technologies**: Google ADK, Gemini 2.0, Streamlit, Python, MCP
+**Core Technologies**: Google ADK, Gemini 2.0 Flash, Streamlit, Python, MCP
+
+**Built with ❤️ to democratize legal contract review**

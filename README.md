@@ -230,15 +230,7 @@ python run_single.py path/to/contract.pdf
 
 ## 🎥 Demo Video
 
-<div align="center">
-  <a href="https://youtu.be/bYt8kRoo0A8">
-    <img src="https://img.youtube.com/vi/bYt8kRoo0A8/maxresdefault.jpg" alt="LegalLens AI Demo" width="600"/>
-  </a>
-  
-  <p><strong><a href="https://youtu.be/bYt8kRoo0A8">▶️ Watch Full Demo on YouTube</a></strong></p>
-  
-  <p><em>See LegalLens AI analyze a 6-page employment contract in under 3 minutes</em></p>
-</div>
+**[▶️ Watch Full Demo on YouTube](https://youtu.be/bYt8kRoo0A8)**
 
 ---
 

@@ -1,12 +1,23 @@
-# LegalLens AI
+<div align="center">
+  <img src="data/figures/LEGAL LENSE AI.png" alt="LegalLens AI Logo" width="400"/>
+  
+  <h1>LegalLens AI</h1>
+  
+  <p><strong>Orchestrating Sequential, Parallel, and Loop Agents for Real-Time Legal Assessment</strong></p>
 
-> **Orchestrating Sequential, Parallel, and Loop Agents for Real-Time Legal Assessment**
-
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Google ADK](https://img.shields.io/badge/Google-ADK-4285F4.svg)](https://github.com/google/adk)
-[![Gemini 2.0](https://img.shields.io/badge/Gemini-2.0%20Flash-orange.svg)](https://ai.google.dev/)
-[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+  [![Google ADK](https://img.shields.io/badge/Google-ADK-4285F4.svg)](https://github.com/google/adk)
+  [![Gemini 2.0](https://img.shields.io/badge/Gemini-2.0%20Flash-orange.svg)](https://ai.google.dev/)
+  [![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  
+  <h3>
+    <a href="https://youtu.be/bYt8kRoo0A8">🎥 Watch Demo Video</a> •
+    <a href="#-installation">📦 Installation</a> •
+    <a href="#-usage">🚀 Usage</a> •
+    <a href="#%EF%B8%8F-architecture">🏗️ Architecture</a>
+  </h3>
+</div>
 
 **A production-ready multi-agent system that automates comprehensive contract review in minutes, not hours.**
 
@@ -48,26 +59,12 @@ Agents enable real-time progress tracking. Users see exactly which stage is runn
 
 LegalLens AI employs a **hierarchical orchestration pattern** with a SequentialAgent root coordinating five specialized stages:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   contract_review_workflow                  │
-│                    (SequentialAgent - Root)                 │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-         ┌───────────────┼───────────────┬─────────────┬──────────────┐
-         ▼               ▼               ▼             ▼              ▼
-    ┌─────────┐   ┌──────────┐   ┌──────────┐   ┌─────────┐   ┌──────────┐
-    │Stage 1  │   │Stage 2   │   │Stage 3   │   │Stage 4  │   │Stage 5   │
-    │Intake   │──▶│Extraction│──▶│Risk      │──▶│Playbook │──▶│Report    │
-    │Agent    │   │Loop      │   │Parallel  │   │Agent    │   │Generator │
-    └─────────┘   └──────────┘   └──────────┘   └─────────┘   └──────────┘
-         │             │               │              │              │
-    Gemini 2.0    Gemini 2.0     Gemini 2.0     Gemini 2.0    Gemini 2.0
-         │             │               │              │              │
-         ▼             ▼               ▼              ▼              ▼
-    PDF Parser    Loop Logic      Parallel       MCP Server     DOCX Export
-                  (max 10x)       Processing                    
-```
+<div align="center">
+  <img src="data/figures/architecture_diagram.png" alt="LegalLens AI Architecture" width="800"/>
+  <p><em>Complete system architecture showing multi-agent orchestration flow</em></p>
+</div>
+
+
 
 ### **Stage 1: Contract Intake** (Sequential Agent)
 - Classifies contract type (Employment, SaaS, NDA, MSA)
@@ -231,6 +228,20 @@ python run_single.py path/to/contract.pdf
 
 ---
 
+## 🎥 Demo Video
+
+<div align="center">
+  <a href="https://youtu.be/bYt8kRoo0A8">
+    <img src="https://img.youtube.com/vi/bYt8kRoo0A8/maxresdefault.jpg" alt="LegalLens AI Demo" width="600"/>
+  </a>
+  
+  <p><strong><a href="https://youtu.be/bYt8kRoo0A8">▶️ Watch Full Demo on YouTube</a></strong></p>
+  
+  <p><em>See LegalLens AI analyze a 6-page employment contract in under 3 minutes</em></p>
+</div>
+
+---
+
 ## 📊 Demo Walkthrough
 
 ### **Upload Contract**
@@ -275,6 +286,8 @@ User uploads a 6-page employment contract PDF
 **Clause-by-Clause Analysis**: Detailed table with risk levels and recommendations
 
 **Total Analysis Time**: 2-3 minutes for 6-page contract
+
+
 
 ---
 
